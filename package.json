@@ -2,10 +2,9 @@
   "name": "hd_zs_front",
   "version": "1.0.0",
   "description": "vue 单页面框架",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js",
-    "build:dll": "webpack --config webpack.config.dll.js",
     "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.dev.js"
   },
   "repository": {
@@ -14,10 +13,16 @@
   },
   "author": "tanlinxuan",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/tanlinxuan/hd_zs_front/issues"
+  "dependencies": {
+    "axios": "^0.19.2",
+    "echarts": "^4.8.0",
+    "element-ui": "^2.13.2",
+    "js-cookie": "^2.2.1",
+    "nprogress": "^0.2.0",
+    "vue": "^2.6.11",
+    "vue-router": "^3.3.4",
+    "vuex": "^3.5.1"
   },
-  "homepage": "https://github.com/tanlinxuan/hd_zs_front#readme",
   "devDependencies": {
     "@babel/core": "^7.10.3",
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
@@ -58,15 +63,6 @@
     "webpack-dev-server": "^3.11.0",
     "webpack-merge": "^4.2.2",
     "webpack-parallel-uglify-plugin": "^1.1.2"
-  },
-  "dependencies": {
-    "axios": "^0.19.2",
-    "echarts": "^4.8.0",
-    "element-ui": "^2.13.2",
-    "js-cookie": "^2.2.1",
-    "nprogress": "^0.2.0",
-    "vue": "^2.6.11",
-    "vue-router": "^3.3.4",
-    "vuex": "^3.5.1"
   }
+
 }

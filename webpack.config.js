@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const {VueLoaderPlugin}=require('vue-loader')
-const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
+
 const  mode=process.env.NODE_ENV
 const  isDev= mode==='development'?true:false
 module.exports = {
@@ -11,7 +11,7 @@ module.exports = {
     entry: path.resolve(__dirname,'src/main.js'),    // 入口文件
     output:{
         path:path.resolve(__dirname,'dist'),
-        publicPath: './',
+       // publicPath: './',
         filename:isDev?'js/[name].js':'js/[name].[hash:8].js',
         chunkFilename:isDev?'js/[name].js':'js/[name].[hash:8].js'
     },
@@ -122,11 +122,10 @@ module.exports = {
         extensions:['*','.js','.jsx','.vue']
     },
     plugins:[
+        new VueLoaderPlugin(),
         new CleanWebpackPlugin({
             path:'./dist'
         }),
-        new HardSourceWebpackPlugin(), //不再需要dll
-        new VueLoaderPlugin(),
         new HtmlWebpackPlugin({
             template:'./index.html',
             inject: 'body',
