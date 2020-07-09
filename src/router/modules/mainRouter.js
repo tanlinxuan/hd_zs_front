@@ -1,0 +1,23 @@
+/**
+ * main pages 页面路由
+ * @author 谭邻宣
+ * @date 2020/7/6 14:32
+ **/
+import menu from "@router/mock";
+const isArray = arr =>{
+    return Object.prototype.toString.call(arr) === '[object Array]'?true:false
+}
+const flatten = arr => arr.reduce((prev, next) => { //递归调用 ，展开 menu 数据 ，将含有url 的配置添加进 router
+    let {name,url,title,component,children} = next;
+        if (isArray(children)) return prev.concat(flatten(children));
+
+        if (url) {
+            let routerConfig = {
+                path: url, name, component,
+                meta: { title: title,  affix: true }
+            }
+            return  prev.concat(routerConfig)
+        }
+    },[])
+const mainRouter =[...flatten(menu)];
+export default mainRouter
