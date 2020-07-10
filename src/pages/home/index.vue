@@ -1,10 +1,15 @@
 <template>
-    <div>home</div>
+    <div>{{count}}</div>
 </template>
 
 <script>
     export default {
-        name: "index"
+        name: "home",
+        computed: {
+            count () {
+                return 'ks'
+            }
+        }
     }
 </script>
 

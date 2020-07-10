@@ -14,7 +14,7 @@
     </div>
 </template>
 <script>
-    import  {setToken} from '@utils/utils'
+   // import  {setToken} from '@utils/utils'
     export default {
         data() {
             return {
@@ -27,11 +27,12 @@
         methods: {
             submitForm(formName) {
                 let that = this;
-                this.$refs[formName].validate((valid) => {
+                that.$refs[formName].validate((valid) => {
                     if (valid) {
-                        alert('submit!');
-                        setToken(that.ruleForm.name)
-                        this.$router.push({ path:'/home' })
+                        //setToken(that.ruleForm.name)
+                        that.$store.dispatch('user/userLogin',that.ruleForm).then(()=>{
+                            that.$router.push({ path:'/home' })
+                        })
                     } else {
                         console.log('error submit!!');
                         return false;

@@ -21,7 +21,8 @@
     "nprogress": "^0.2.0",
     "vue": "^2.6.11",
     "vue-router": "^3.3.4",
-    "vuex": "^3.5.1"
+    "vuex": "^3.5.1",
+    "vuex-persistedstate": "^3.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.10.3",
@@ -64,5 +65,4 @@
     "webpack-merge": "^4.2.2",
     "webpack-parallel-uglify-plugin": "^1.1.2"
   }
-
 }

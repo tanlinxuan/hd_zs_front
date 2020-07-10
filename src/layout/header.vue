@@ -6,12 +6,18 @@
                 popoverShow: false
             };
         },
+        computed:{
+            // userName(){ //获取登录用户信息
+            //     return this.$store.getters.userInfo.name
+            // }
+        },
         methods: {
             setPopoverShow(type) {
                 this.popoverShow = type
             }
         },
         render() {
+            const {userInfo} = this.$store.getters
             return (
                 <div class="app-header">
                     <div class="logo"></div>
@@ -24,13 +30,14 @@
                                             }}
                                             on-hide={() => {
                                                 this.setPopoverShow(false)
-                                            }}>
+                                            }}
+                                >
                                     <p>修改密码</p>
                                     <p>退出登录</p>
                                     <span slot="reference">
-                name
-                <i class={this.popoverShow ? 'el-icon-arrow-down' : 'el-icon-arrow-up'}></i>
-                            </span>
+                                        <span>{userInfo.name}</span>
+                                        <i class={this.popoverShow ? 'el-icon-arrow-down' : 'el-icon-arrow-up'}></i>
+                                    </span>
                                 </el-popover>
                             </li>
                         </ul>
