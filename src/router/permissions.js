@@ -17,8 +17,12 @@ router.beforeEach(async(to, from, next) => {
     if (hasToken) { //判断当前是否登录
         next()
     } else {
-        next(`/login`)
-        NProgress.done()
+        if (to.path === '/login') { // 如果是登录页面的话，直接next()
+            next();
+        } else { // 否则 跳转到登录页面
+            next(`/login`)
+            NProgress.done()
+        }
     }
 })
 

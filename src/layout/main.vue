@@ -5,7 +5,9 @@
             let {path} = this.$route;
             return(
                 <div class="app-main">
-                    <router-view key={path} />
+                    <keep-alive>
+                        <router-view key={path} />
+                    </keep-alive>
                 </div>
             )
         }

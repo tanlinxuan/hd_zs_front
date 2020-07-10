@@ -28,15 +28,10 @@
             submitForm(formName) {
                 let that = this;
                 that.$refs[formName].validate((valid) => {
-                    if (valid) {
-                        //setToken(that.ruleForm.name)
-                        that.$store.dispatch('user/userLogin',that.ruleForm).then(()=>{
-                            that.$router.push({ path:'/home' })
-                        })
-                    } else {
-                        console.log('error submit!!');
-                        return false;
-                    }
+                    if (!valid) return false
+                    that.$store.dispatch('user/userLogin',that.ruleForm).then(()=>{
+                        that.$router.push({ path:'/home' })
+                    })
                 });
             },
             resetForm(formName) {

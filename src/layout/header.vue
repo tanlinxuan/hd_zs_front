@@ -6,14 +6,15 @@
                 popoverShow: false
             };
         },
-        computed:{
-            // userName(){ //获取登录用户信息
-            //     return this.$store.getters.userInfo.name
-            // }
-        },
         methods: {
             setPopoverShow(type) {
                 this.popoverShow = type
+            },
+            exit(){
+                let that = this;
+                that.$store.dispatch('user/userExit',{}).then(()=>{
+                    that.$router.push({ path:'/login'})
+                })
             }
         },
         render() {
@@ -33,9 +34,9 @@
                                             }}
                                 >
                                     <p>修改密码</p>
-                                    <p>退出登录</p>
+                                    <p onClick={()=>{this.exit()}}>退出登录</p>
                                     <span slot="reference">
-                                        <span>{userInfo.name}</span>
+                                        <span>{userInfo.userName}</span>
                                         <i class={this.popoverShow ? 'el-icon-arrow-down' : 'el-icon-arrow-up'}></i>
                                     </span>
                                 </el-popover>
