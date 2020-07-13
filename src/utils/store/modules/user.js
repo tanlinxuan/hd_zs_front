@@ -1,5 +1,8 @@
 
 import  {setToken ,removeToken } from '@utils/utils'
+import HTTP from "@httpServer";
+import httpServer from "@httpServer/serverConfig";
+
 const state={ //定义登录用户相关state
   userInfo:{}  //用户信息
 }
@@ -24,6 +27,9 @@ const actions = {
       roleInfo:'系统管理员',
       token:'1234567890'
     }
+    HTTP.post(httpServer.login,data).then(res=>{
+      debugger
+    })
     commit('USER_LOGIN', datas )
   },
   userExit({ commit },data) {

@@ -25,6 +25,6 @@ module.exports = WebpackMerge(webpackConfig,{
         })],
     },
     plugins:[
-        new HardSourceWebpackPlugin(), //不再需要dll
+        new HardSourceWebpackPlugin(), //牛批新技术，不再需要dll
     ]
 })

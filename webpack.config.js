@@ -3,15 +3,13 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const {VueLoaderPlugin}=require('vue-loader')
-
-const  mode=process.env.NODE_ENV
+const projectConfig = require('./projectConfig')
+const {entry ,mode ,alias} = projectConfig
 const  isDev= mode==='development'?true:false
 module.exports = {
-    //mode:'development', // 开发模式
-    entry: path.resolve(__dirname,'src/main.js'),    // 入口文件
+    entry: entry || path.resolve(__dirname,'src/main.js'),
     output:{
         path:path.resolve(__dirname,'dist'),
-       // publicPath: './',
         filename:isDev?'js/[name].js':'js/[name].[hash:8].js',
         chunkFilename:isDev?'js/[name].js':'js/[name].[hash:8].js'
     },
@@ -111,13 +109,7 @@ module.exports = {
     },
     resolve:{
         alias:{
-            'vue$':'vue/dist/vue.esm.js',
-            '@src':path.resolve(__dirname,'src'),
-            '@utils':path.resolve(__dirname,'src/utils'),
-            '@pages':path.resolve(__dirname,'src/pages'),
-            '@router':path.resolve(__dirname,'src/router'),
-            '@public':path.resolve(__dirname,'src/public'),
-            '@httpServer':path.resolve(__dirname,'src/httpServer'),
+            ...alias
         },
         extensions:['*','.js','.jsx','.vue']
     },

@@ -3,10 +3,10 @@
  * @author 谭邻宣
  * @date 2020/7/6 14:12
  **/
-const baseServer={ //基础路由集合
-    menuUrl:``
+const baseUrl = `/api`
+
+const httpServer = {
+    login:`${baseUrl}/login`
 }
 
-export  default {
-    baseServer
-}
+export default httpServer
