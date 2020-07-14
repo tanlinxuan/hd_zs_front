@@ -42,6 +42,25 @@ const mutations = {
     },
     ['CHANGE_TAB'](state , path){
         state.pageInfo.activePath = getPageInfo(path)
+    },
+    ['CLOSE_TAB'](state , path){
+        let activeIndex=0
+        let pageTabs = state.pageInfo.pageTabs.reduce((prev, cur, index) =>{
+            if(cur.path !== path){
+                prev.push(cur)
+            }else{
+                activeIndex = index
+            }
+            return prev
+        },[])
+        state.pageInfo.pageTabs=pageTabs
+        if(pageTabs.length>activeIndex){
+            debugger
+            state.pageInfo.activePath = pageTabs[activeIndex]
+        }else{
+            debugger
+            state.pageInfo.activePath = pageTabs[pageTabs.length-1]
+        }
     }
 }
 const actions = {
@@ -60,6 +79,9 @@ const actions = {
     },
     changeTab({commit},path){
         commit('CHANGE_TAB',path)
+    },
+    closeTab({commit},path){
+        commit('CLOSE_TAB',path)
     }
 
 }

@@ -1,14 +1,20 @@
 <template>
     <div class="app-main">
-        <el-tabs v-model="activePath.name" type="card" closable>
+        <keep-alive>
+        <el-tabs v-model="activePath.name" type="card" closable @tab-click="tabClick" @tab-remove="tabRemove">
             <el-tab-pane
                     v-for="item in pageTabs"
                     :key="item.name"
                     :label="item.title"
+                    :routerPath="item.path"
                     :name="item.name">
-                <router-view :key="item.path" />
+<!--                <keep-alive>-->
+<!--                    <router-view />-->
+<!--                </keep-alive>-->
+                <router-view />
             </el-tab-pane>
         </el-tabs>
+        </keep-alive>
     </div>
 </template>
 
@@ -17,9 +23,7 @@
     export default {
         name:'Main',
         data() {
-            return {
-
-            }
+            return {}
         },
         computed:{
             ...mapState({
@@ -28,7 +32,21 @@
             }),
         },
         methods: {
-
+            tabClick(e){
+                let path = e.$attrs.routerPath
+                this.$store.dispatch('pageTab/changeTab',path).then(()=>{
+                    this.$router.push({ path:path })
+                })
+            },
+            tabRemove(name){
+                let event = {};
+                this.pageTabs.forEach(item=>{
+                    if(item.name === name){event=item}
+                })
+                this.$store.dispatch('pageTab/closeTab',event.path).then(()=>{
+                    this.$router.push({ path:this.activePath.path })
+                })
+            }
         }
     }
 </script>

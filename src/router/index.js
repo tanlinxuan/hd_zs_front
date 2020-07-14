@@ -24,7 +24,7 @@ const constantRoutes = [
                 path: 'home',
                 name: 'home',
                 component: () => import('@src/pages/home'),
-                meta: { title: '首页',  affix: true }
+                meta: { title: '首页',  keepAlive: true, affix: true }
             },
             ...mainRouter
         ]

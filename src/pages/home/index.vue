@@ -7,7 +7,7 @@
         name: "home",
         computed: {
             count () {
-                return 'ks'
+                return 'home'
             }
         }
     }

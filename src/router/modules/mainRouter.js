@@ -13,7 +13,7 @@ const flatten = arr => arr.reduce((prev, next) => { //递归调用 ，展开 men
         if (path) {
             let routerConfig = {
                 path, name, component,
-                meta: { title: title,  affix: true }
+                meta: { title: title,  keepAlive: true, affix: true }
             }
             return  prev.concat(routerConfig)
         }
