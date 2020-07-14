@@ -8,6 +8,10 @@ import Router from 'vue-router'
 import Layout from  '@src/layout'
 import baseRouter from "./modules/baseRouter";
 import mainRouter from "./modules/mainRouter";
+const originalPush = Router.prototype.push
+Router.prototype.push = function push(location) {
+    return originalPush.call(this, location).catch(err => err)
+}
 Vue.use(Router)
 const constantRoutes = [
     ...baseRouter,
@@ -26,6 +30,8 @@ const constantRoutes = [
         ]
     }
 ]
+export const asyncRoutes = []
+
 const createRouter = () => new Router({
     scrollBehavior: () => ({ y: 0 }),
     routes: constantRoutes

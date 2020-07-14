@@ -27,9 +27,9 @@ const actions = {
       roleInfo:'系统管理员',
       token:'1234567890'
     }
-    HTTP.post(httpServer.login,data).then(res=>{
-      debugger
-    })
+    // HTTP.post(httpServer.login,data).then(res=>{
+    //   debugger
+    // })
     commit('USER_LOGIN', datas )
   },
   userExit({ commit },data) {

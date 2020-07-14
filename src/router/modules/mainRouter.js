@@ -8,12 +8,11 @@ const isArray = arr =>{
     return Object.prototype.toString.call(arr) === '[object Array]'?true:false
 }
 const flatten = arr => arr.reduce((prev, next) => { //递归调用 ，展开 menu 数据 ，将含有url 的配置添加进 router
-    let {name,url,title,component,children} = next;
+    let {name,path,title,component,children} = next;
         if (isArray(children)) return prev.concat(flatten(children));
-
-        if (url) {
+        if (path) {
             let routerConfig = {
-                path: url, name, component,
+                path, name, component,
                 meta: { title: title,  affix: true }
             }
             return  prev.concat(routerConfig)

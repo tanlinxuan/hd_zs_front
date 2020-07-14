@@ -7,7 +7,7 @@
 const baseRouter =[
     {
         path: '/login',
-        component: () => import('@src/login'),
+        component: () => import('@pages/login'),
         hidden: true
     }
 ]

@@ -6,11 +6,11 @@
             return {
                 isCollapse: false,
                 menuData:menu||[],
-                renderMenu:data=>{ //递归返回 菜单列表
+                renderMenu:data=>{ //递归返回菜单列表
                     return data.map(item => {
-                        let { children ,code,name ,icon ,url,title} = item;
+                        let { children ,name ,title} = item;
                         if (children && children.length) {
-                            return (<el-submenu index={code}>
+                            return (<el-submenu index={name}>
                                 <template slot="title">
                                     <span slot="title">{title}</span>
                                 </template>
@@ -19,7 +19,7 @@
                                 }
                             </el-submenu>)
                         } else {
-                            return (<el-menu-item index={url}>
+                            return (<el-menu-item onClick={()=>this.handSelect(item)} >
                                 <span slot="title">{title}</span>
                             </el-menu-item>)
                         }
@@ -28,6 +28,11 @@
             };
         },
         methods: {
+            handSelect(item){
+                this.$store.dispatch('pageTab/addTab',item.path).then(()=>{
+                    this.$router.push({ path:item.path })
+                })
+            },
             handleOpen(key, keyPath) {
                 console.log(key, keyPath);
             },
@@ -40,7 +45,6 @@
                 <div class="app-aside">
                     <el-menu default-active="1-4-1"
                              router={true}
-                             class="el-menu-vertical-demo"
                              on-open={this.handleOpen}
                              on-close={this.handleClose}
                              collapse={this.isCollapse}>

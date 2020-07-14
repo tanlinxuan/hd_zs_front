@@ -29,4 +29,4 @@ const projectConfig={
 
 }
 
-export default projectConfig
+module.exports=projectConfig

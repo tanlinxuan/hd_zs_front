@@ -1,10 +1,10 @@
 <template>
-    <div>list1</div>
+    <div>warningManageList</div>
 </template>
 
 <script>
     export default {
-        name: "ruleList"
+        name: "warningManageList"
     }
 </script>
 

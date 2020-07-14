@@ -1,10 +1,10 @@
 <template>
-    <div>list2</div>
+    <div>ruleList</div>
 </template>
 
 <script>
     export default {
-        name: "index"
+        name: "ruleList"
     }
 </script>
 
