@@ -17,15 +17,12 @@ router.beforeEach(async(to, from, next) => {
             next()
         }else{
             const visitedViews=store.getters.visitedViews; // 获取 store 缓存的当前所有打开页面
-            let visitedPath = to.path;
-            // if(to.path.indexOf('?') > -1){ // 如果to.path 含有参数 ，去掉参数做比较
-            //     visitedPath = to.path.substring(0,to.path.indexOf('?'));
-            // }
+            let visitedPath = to.fullPath;
             const hasView=visitedViews.some(item=>{ return item.path === visitedPath}) // 判断当前缓存里是否已有此页面
             const _View= {
                 name:to.name,
-                path:to.path,
-                title:to.meta.title
+                path:visitedPath,
+                title:to.query.title? `${to.meta.title}(${to.query.title})`:to.meta.title
             }
             if(hasView){
                 store.dispatch('tagViews/changeViewList', _View)

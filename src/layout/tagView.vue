@@ -25,7 +25,7 @@
                 const {visitedViews, activeView} = this.$store.getters
                 return visitedViews.map(item => {
                     let showClose = item.name !== 'home' ? true : false;
-                    return <div class={`tags ${item.name === activeView.name ? 'active' : ''}`} key={item.name}
+                    return <div class={`tags ${item.path === activeView.path ? 'active' : ''}`} key={item.path}
                                  closable>
                         <span onClick={()=>{this.changeTag(item)}}>{item.title}</span>
                         {
