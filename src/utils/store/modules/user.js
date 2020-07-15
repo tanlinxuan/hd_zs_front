@@ -15,6 +15,7 @@ const mutations = {
   },
   ['USER_EXIT'] (state,data) {  //用户登出
     let vuexData = sessionStorage.getItem('vuex')
+    debugger
     sessionStorage.setItem('store', vuexData)
     removeToken()
     state.userInfo = {}

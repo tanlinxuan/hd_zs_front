@@ -27,9 +27,6 @@
           Header, //头部
           Aside, // 左侧菜单
           Main  // body
-        },
-        computed: {
-
         }
     }
 </script>
