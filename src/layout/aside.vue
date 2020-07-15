@@ -8,7 +8,7 @@
                 menuData:menu||[],
                 renderMenu:data=>{ //递归返回菜单列表
                     return data.map(item => {
-                        let { children ,name ,title} = item;
+                        let { children ,name ,title ,isMenu} = item;
                         if (children && children.length) {
                             return (<el-submenu index={name}>
                                 <template slot="title">
@@ -19,7 +19,7 @@
                                 }
                             </el-submenu>)
                         } else {
-                            return (<el-menu-item onClick={()=>this.handSelect(item)} >
+                            return (isMenu && <el-menu-item onClick={()=>this.handSelect(item)} >
                                 <span slot="title">{title}</span>
                             </el-menu-item>)
                         }
@@ -29,9 +29,7 @@
         },
         methods: {
             handSelect(item){
-                this.$store.dispatch('pageTab/addTab',item.path).then(()=>{
-                    this.$router.push({ path:item.path })
-                })
+                this.$router.push({ path:item.path})
             },
             handleOpen(key, keyPath) {
                 console.log(key, keyPath);

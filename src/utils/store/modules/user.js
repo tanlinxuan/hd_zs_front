@@ -2,6 +2,7 @@
 import  {setToken ,removeToken } from '@utils/utils'
 import HTTP from "@httpServer";
 import httpServer from "@httpServer/serverConfig";
+import store from "../index";
 
 const state={ //定义登录用户相关state
   userInfo:{}  //用户信息
@@ -15,7 +16,7 @@ const mutations = {
   },
   ['USER_EXIT'] (state,data) {  //用户登出
     let vuexData = sessionStorage.getItem('vuex')
-    debugger
+    store.dispatch('tagViews/resultViews')
     sessionStorage.setItem('store', vuexData)
     removeToken()
     state.userInfo = {}

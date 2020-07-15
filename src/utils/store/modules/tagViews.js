@@ -36,7 +36,11 @@ const mutations = {
         }else{
             state.activeView = pageTabs[pageTabs.length-1]
         }
-    }
+    },
+    ['RESULT_VIEWS'](state){
+        state.activeView = defaultView;
+        state.visitedViews = [defaultView]
+    },
 }
 const actions = {
     addViewList({commit} , view) {
@@ -48,6 +52,9 @@ const actions = {
     removeViewList({commit} , view) {
         commit('REMOVE_VIEWS',view)
     },
+    resultViews({commit}){
+        commit('RESULT_VIEWS')
+    }
 }
 export default {
     namespaced:true,
