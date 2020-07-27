@@ -10,7 +10,7 @@ const projectConfig={
     entry:path.resolve(__dirname,'src/main.js'),  // 入口文件,
     mode:process.env.NODE_ENV || 'development' , // 环境
     alias:{ //静态文件路径别名配置
-        'vue$':'vue/dist/vue.esm.js',  // 防止依赖 VUE 版本不一致
+        //'vue$':'vue/dist/vue.esm.js',  // 防止依赖 VUE 版本不一致
         '@src':path.resolve(__dirname,'src'), // 项目主目录
         '@utils':path.resolve(__dirname,'src/utils'), // 全局方法 、store
         '@pages':path.resolve(__dirname,'src/pages'), // 页面入口

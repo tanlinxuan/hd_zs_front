@@ -3,16 +3,16 @@
  * @author 谭邻宣
  * @date 2020/7/4 14:05
  **/
-import Vue from 'vue'
-import Router from 'vue-router'
+//import Vue from 'vue'
+
 import Layout from  '@src/layout'
 import baseRouter from "./modules/baseRouter";
 import mainRouter from "./modules/mainRouter";
-const originalPush = Router.prototype.push
-Router.prototype.push = function push(location) {
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
     return originalPush.call(this, location).catch(err => err)
 }
-Vue.use(Router)
+//Vue.use(Router)
 const constantRoutes = [
     ...baseRouter,
     {
@@ -32,7 +32,7 @@ const constantRoutes = [
 ]
 export const asyncRoutes = []
 
-const createRouter = () => new Router({
+const createRouter = () => new VueRouter({
     scrollBehavior: () => ({ y: 0 }),
     routes: constantRoutes
 })

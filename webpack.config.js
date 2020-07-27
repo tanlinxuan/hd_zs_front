@@ -113,6 +113,13 @@ module.exports = {
         },
         extensions:['*','.js','.jsx','.vue']
     },
+    externals: {
+        "vue":"Vue",
+        'vue-router': 'VueRouter',
+        'vuex': 'Vuex',
+        'element-ui': 'ElementUI',
+        'echarts': 'echarts',
+    },
     plugins:[
         new VueLoaderPlugin(),
         new CleanWebpackPlugin({
@@ -127,7 +134,7 @@ module.exports = {
         }),
         new MiniCssExtractPlugin({
             filename:isDev?'css/[name].css': "css/[name].[hash:8].css",
-            chunkFilename: isDev?'css/[id].css':"css/[id].[hash:8].css",
+            chunkFilename: isDev?'css/[name].css':"css/[name].[hash:8].css",
         })
     ],
 }

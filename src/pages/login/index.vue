@@ -14,7 +14,7 @@
     </div>
 </template>
 <script>
-   // import  {setToken} from '@utils/utils'
+    import './index.less'
     export default {
         data() {
             return {
