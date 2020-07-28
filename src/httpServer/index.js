@@ -4,10 +4,8 @@
  * @date 2020/7/10 16:24
  **/
 import axios from 'axios'
-import { Message } from 'element-ui'
 import { getToken} from '@utils/utils'
 import store from "@utils/store";
-const message = Message;
 const HTTP = axios.create({
     timeout: 3 * 60 * 1000, //三分钟超时
     headers: {
@@ -34,7 +32,7 @@ HTTP.interceptors.response.use(
     response => {
         const res = response.data
         if (res.code !== '0000') {
-            message({
+            ElementUI.message({
                 message: res.message || 'Error',
                 type: 'error',
                 duration: 5 * 1000
@@ -45,7 +43,7 @@ HTTP.interceptors.response.use(
         }
     },
     error => {
-        message({
+        ElementUI.message({
             message: error.message,
             type: 'error',
             duration: 5 * 1000
