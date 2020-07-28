@@ -27,19 +27,21 @@ module.exports = WebpackMerge(webpackConfig,{
     },
     plugins:[
         new HardSourceWebpackPlugin(), //牛批新技术，不再需要dll
-        new BundleAnalyzerPlugin(
-            {
-                analyzerMode: 'server',
-                analyzerHost: '127.0.0.1',
-                analyzerPort: 8989, // 显示各模块包大小
-                reportFilename: 'report.html',
-                defaultSizes: 'parsed',
-                openAnalyzer: true,
-                generateStatsFile: false,
-                statsFilename: 'stats.json',
-                statsOptions: null,
-                logLevel: 'info'
-            }
-        )
+
+        // 打包文件详情分析 ，调试完毕即可删除
+        // new BundleAnalyzerPlugin(
+        //     {
+        //         analyzerMode: 'server',
+        //         analyzerHost: '127.0.0.1',
+        //         analyzerPort: 8989, // 显示各模块包大小
+        //         reportFilename: 'report.html',
+        //         defaultSizes: 'parsed',
+        //         openAnalyzer: true,
+        //         generateStatsFile: false,
+        //         statsFilename: 'stats.json',
+        //         statsOptions: null,
+        //         logLevel: 'info'
+        //     }
+        // )
     ]
 })
