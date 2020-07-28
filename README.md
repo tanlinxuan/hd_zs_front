@@ -1,7 +1,9 @@
 # 通用中后台 前端框架
 
 #### 项目介绍
-通用 vue 前端项目框架
+通用 vue 前端项目框架 
+
+CND 引入 vue vuex vue-router echarts  elementUI
 
 #### 软件架构
  node 10 +
@@ -28,7 +30,6 @@ eg:
     * utils-----全局方法目录
         * store-----全局状态管理
     * app.vue-----页面主入口
-        
     * base.less-----初始化样式
     * common.less-----全局样式表
     * main.js-----项目打包主入口
