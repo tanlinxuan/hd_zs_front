@@ -31,8 +31,7 @@
                                             }}
                                             on-hide={() => {
                                                 this.setPopoverShow(false)
-                                            }}
-                                >
+                                            }}>
                                     <p>修改密码</p>
                                     <p onClick={()=>{this.exit()}}>退出登录</p>
                                     <span slot="reference">

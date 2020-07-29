@@ -1,11 +1,13 @@
 <template>
     <div class="app-main">
         <TagView/>
-        <transition name="slide-fade">
-            <keep-alive :include="keepAlive">
-                <router-view :key="key"/>
-            </keep-alive>
-        </transition>
+        <div class="component">
+            <transition name="slide-fade" mode="out-in">
+                <keep-alive :include="keepAlive">
+                    <router-view :key="key"/>
+                </keep-alive>
+            </transition>
+        </div>
     </div>
 </template>
 <script type="text/jsx">

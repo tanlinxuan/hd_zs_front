@@ -9,6 +9,13 @@
                 activeView: state => state.activeView,
             })
         },
+        watch: {  //hotkeyList渲染完后，获取高度
+            hotkeyList: function () {
+                this.$nextTick(function () {
+
+                });
+            }
+        },
         methods: {
             removeTag(vm) {  //关闭页面
                 this.$store.dispatch('tagViews/removeViewList', vm).then(() => {
@@ -25,23 +32,30 @@
                 const {visitedViews, activeView} = this.$store.getters
                 return visitedViews.map(item => {
                     let showClose = item.name !== 'home' ? true : false;
-                    return <div class={`tags ${item.path === activeView.path ? 'active' : ''}`} key={item.path} closable>
+                    let _html =  <li class={`${item.path === activeView.path ? 'active' : ''}`} key={item.path} closable>
                                 <span onClick={()=>{this.changeTag(item)}}>{item.title}</span>
                                 {
                                     showClose &&
                                     <i class={`el-icon-close`} onClick={() => {this.removeTag(item)}}>
                                     </i>
                                 }
-                            </div>
+                            </li>
+                    return _html;
                 })
             }
         },
         render() {
             return (
                 <div class="app-tags-view">
-                    {
-                        this.renderTagList()
-                    }
+                    <span class="prev-view"></span>
+                    <div class="views-box">
+                        <ul>
+                            {
+                                this.renderTagList()
+                            }
+                        </ul>
+                    </div>
+                    <span class="next-view"></span>
                 </div>
             )
         }
