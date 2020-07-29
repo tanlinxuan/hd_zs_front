@@ -10,7 +10,7 @@
             })
         },
         methods: {
-            removeTag(vm) {
+            removeTag(vm) {  //关闭页面
                 this.$store.dispatch('tagViews/removeViewList', vm).then(() => {
                     const {activeView} = this.$store.getters
                     this.$router.push({path: activeView.path})
@@ -25,14 +25,13 @@
                 const {visitedViews, activeView} = this.$store.getters
                 return visitedViews.map(item => {
                     let showClose = item.name !== 'home' ? true : false;
-                    return <div class={`tags ${item.path === activeView.path ? 'active' : ''}`} key={item.path}
-                                 closable>
-                        <span onClick={()=>{this.changeTag(item)}}>{item.title}</span>
-                        {
-                            showClose &&
-                            <i class={`el-icon-close`} onClick={() => {this.removeTag(item)}}>
-                            </i>
-                        }
+                    return <div class={`tags ${item.path === activeView.path ? 'active' : ''}`} key={item.path} closable>
+                                <span onClick={()=>{this.changeTag(item)}}>{item.title}</span>
+                                {
+                                    showClose &&
+                                    <i class={`el-icon-close`} onClick={() => {this.removeTag(item)}}>
+                                    </i>
+                                }
                             </div>
                 })
             }

@@ -9,13 +9,12 @@
     export default {
         name: "ruleList",
         data() {
-            return {
-                input: '',
-            }
+            return {input:''}
         },
         methods: {
             search(){
-                this.$router.push({ path:`/ruleManageList/detail?title=${this.input}`,})
+                this.$store.dispatch('tagViews/addCacheView','ruleList') // 开启页面缓存
+                this.$router.push({ path:encodeURI(`/ruleManageList/detail?title=${this.input}`)})
             }
         }
     }

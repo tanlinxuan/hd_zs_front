@@ -2,38 +2,38 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
-const {VueLoaderPlugin}=require('vue-loader')
+const {VueLoaderPlugin} = require('vue-loader')
 const projectConfig = require('./projectConfig')
-const {entry ,mode ,alias} = projectConfig
-const  isDev= mode==='development'?true:false
+const {entry, mode, alias} = projectConfig
+const isDev = mode === 'development' ? true : false
 module.exports = {
-    entry: entry || path.resolve(__dirname,'src/main.js'),
-    output:{
-        path:path.resolve(__dirname,'dist'),
-        filename:isDev?'js/[name].js':'js/[name].[hash:8].js',
-        chunkFilename:isDev?'js/[name].js':'js/[name].[hash:8].js'
+    entry: entry || path.resolve(__dirname, 'src/main.js'),
+    output: {
+        path: path.resolve(__dirname, 'dist'),
+        filename: isDev ? 'js/[name].js' : 'js/[name].[hash:8].js',
+        chunkFilename: isDev ? 'js/[name].js' : 'js/[name].[hash:8].js'
     },
-    mode:mode,
-    module:{
-        rules:[
+    mode: mode,
+    module: {
+        rules: [
             {
-                test:/\.vue$/,
+                test: /\.vue$/,
                 exclude: /node_modules/,
                 include: path.resolve(__dirname, 'src'),
-                use:[{
-                    loader:'vue-loader',
-                    options:{
-                        compilerOptions:{
-                            preserveWhitespace:false
+                use: [{
+                    loader: 'vue-loader',
+                    options: {
+                        compilerOptions: {
+                            preserveWhitespace: false
                         }
                     }
                 }]
             },
             {
-                test:/\.(js|jsx)$/,
+                test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
                 include: path.resolve(__dirname, 'src'),
-                use:[{
+                use: [{
                     loader: "thread-loader",
                     options: {
                         workers: 2,
@@ -43,23 +43,23 @@ module.exports = {
                         poolTimeout: 2000,
                         poolParallelJobs: 100,
                     }
-                },{
-                    loader:'babel-loader',
-                    options:{
-                        presets:['@babel/preset-env']
+                }, {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env']
                     }
                 }]
             },
             {
-                test:/\.(css|less)$/,
-                use:[
+                test: /\.(css|less)$/,
+                use: [
                     'style-loader',
                     MiniCssExtractPlugin.loader,
                     'css-loader',
                     {
-                        loader:'postcss-loader',
-                        options:{
-                            plugins:[require('autoprefixer')({
+                        loader: 'postcss-loader',
+                        options: {
+                            plugins: [require('autoprefixer')({
                                 overrideBrowserslist: ['last 30 versions', "> 2%", "Firefox >= 10", "ie 6-11"]
                             })]
                         }
@@ -75,8 +75,8 @@ module.exports = {
                     {
                         loader: 'url-loader',
                         options: {
-                            limit:10*1024,
-                            publicPath:'../',
+                            limit: 10 * 1024,
+                            publicPath: '../',
                             fallback: {
                                 loader: 'file-loader',
                                 options: {
@@ -93,8 +93,8 @@ module.exports = {
                     {
                         loader: 'url-loader',
                         options: {
-                            limit:1024*5,
-                            publicPath:'../',
+                            limit: 1024 * 5,
+                            publicPath: '../',
                             fallback: {
                                 loader: 'file-loader',
                                 options: {
@@ -107,34 +107,34 @@ module.exports = {
             }
         ]
     },
-    resolve:{
-        alias:{
+    resolve: {
+        alias: {
             ...alias
         },
-        extensions:['*','.js','.jsx','.vue']
+        extensions: ['*', '.js', '.jsx', '.vue']
     },
     externals: {
-        "vue":"Vue",
+        "vue": "Vue",
         'vue-router': 'VueRouter',
         'vuex': 'Vuex',
         'element-ui': 'ElementUI',
         'echarts': 'echarts',
     },
-    plugins:[
+    plugins: [
         new VueLoaderPlugin(),
         new CleanWebpackPlugin({
-            path:'./dist'
+            path: './dist'
         }),
         new HtmlWebpackPlugin({
-            template:'./index.html',
+            template: './index.html',
             inject: 'body',
             minify: {
                 removeComments: true
             }
         }),
         new MiniCssExtractPlugin({
-            filename:isDev?'css/[name].css': "css/[name].[hash:8].css",
-            chunkFilename: isDev?'css/[name].css':"css/[name].[hash:8].css",
+            filename: isDev ? 'css/[name].css' : "css/[name].[hash:8].css",
+            chunkFilename: isDev ? 'css/[name].css' : "css/[name].[hash:8].css",
         })
     ],
 }

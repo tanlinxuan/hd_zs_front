@@ -1,8 +1,10 @@
 <template>
     <div class="app-main">
         <TagView/>
-        <transition name="fade-transform" mode="out-in">
-            <router-view/>
+        <transition name="slide-fade">
+            <keep-alive :include="keepAlive">
+                <router-view :key="key"/>
+            </keep-alive>
         </transition>
     </div>
 </template>
@@ -13,5 +15,16 @@
         components: {
             TagView
         },
+        computed: {
+            keepAlive() {
+                return this.$store.getters.cachedViews
+            },
+            key() {
+                return this.$route.fullPath
+            }
+        },
+        created() {
+            console.log(this.$route)
+        }
     }
 </script>
