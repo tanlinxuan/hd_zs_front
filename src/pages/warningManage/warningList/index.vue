@@ -1,7 +1,8 @@
 <template>
-    <div>warningManageList</div>
+    <div class="page page-warningManageList">
+        <div>warningManageList</div>
+    </div>
 </template>
-
 <script>
     export default {
         name: "warningManageList"

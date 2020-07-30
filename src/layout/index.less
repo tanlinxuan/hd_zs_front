@@ -28,12 +28,19 @@
 .app-main {
   width: 100%;
   height: 100%;
-  background-color: #f5f5f5;
+  background-color: #f9f9f9;
   .component{
-    width: 100%;
-    height: calc(100% - 42px);
+    height: calc(100% - 106px);
+    padding: 32px 40px;
     overflow-x: hidden;
     overflow-y: auto;
+    .page{ //页面直接主容器 ，所有路由页面放此class 下
+      width: 100%;
+      min-height: 100%;
+      border-radius: 4px;
+      box-shadow: 0 0 10px #eee;
+      background-color: #fff;
+    }
   }
   .app-tags-view {
     height: 40px;
@@ -125,9 +132,11 @@
 }
 
 /* slide-fade*/
-.slide-fade-leave-active,
+.slide-fade-leave-active{
+  transition: all .3s ease;
+}
 .slide-fade-enter-active {
-  transition: all .5s ease;
+  transition: all .2s ease;
 }
 
 .slide-fade-enter {

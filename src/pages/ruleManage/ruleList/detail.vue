@@ -1,5 +1,7 @@
 <template>
-    <div>详情 {{title}}</div>
+    <div class="page page-ruleDetail">
+        <div>详情 {{title}}</div>
+    </div>
 </template>
 <script>
     import { getUrlKey} from '@utils/utils'

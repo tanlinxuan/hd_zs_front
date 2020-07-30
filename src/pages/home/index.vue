@@ -1,7 +1,8 @@
 <template>
-    <div>{{count}}</div>
+    <div class="page page-home">
+        <div>{{count}}</div>
+    </div>
 </template>
-
 <script>
     export default {
         name: "home",
@@ -12,7 +13,3 @@
         }
     }
 </script>
-
-<style scoped>
-
-</style>

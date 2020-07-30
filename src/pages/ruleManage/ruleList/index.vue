@@ -1,15 +1,43 @@
 <template>
-    <div>
-        <el-input v-model="input" placeholder="请输入内容"></el-input>
-        <br/>
-        <el-button type="primary" icon="el-icon-search" @click="search">详情</el-button>
+    <div class="page page-ruleList">
+        <CqTable :table-props="tableProps"></CqTable>
     </div>
 </template>
 <script>
+    import CqTable from  '@components/Table'
     export default {
         name: "ruleList",
+        components: {
+            CqTable
+        },
         data() {
-            return {input:''}
+            return {
+                tableProps:{
+                    data: [
+                        {
+                            date: '2016-05-02',
+                            name: '王小虎',
+                            address: '上海市普陀区金沙江路 1518 弄'
+                        }, {
+                            date: '2016-05-04',
+                            name: '王小虎',
+                            address: '上海市普陀区金沙江路 1517 弄'
+                        }, {
+                            date: '2016-05-01',
+                            name: '王小虎',
+                            address: '上海市普陀区金沙江路 1519 弄'
+                        }, {
+                            date: '2016-05-03',
+                            name: '王小虎',
+                            address: '上海市普陀区金沙江路 1516 弄'
+                        }],
+                    column:[
+                        {label:'日期', prop:'data'},
+                        {label:'姓名', prop:'name'},
+                        {label:'地址', prop:'address'}
+                    ]
+                }
+            }
         },
         methods: {
             search(){

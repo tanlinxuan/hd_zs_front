@@ -17,6 +17,7 @@ const projectConfig={
         '@router':path.resolve(__dirname,'src/router'), // 路由管理
         '@public':path.resolve(__dirname,'src/public'), // 静态资源文件
         '@httpServer':path.resolve(__dirname,'src/httpServer'), // API 管理
+        '@components':path.resolve(__dirname,'src/components'), // 通用组件库
     },
     proxy: {  //自定义代理配置集合
         '/api':{
