@@ -43,10 +43,47 @@
     >span{
       display: inline-block;
       height: 40px;
-      width: 20px;
+      width: 29px;
+      position: relative;
+      &:before{
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 10px;
+        height: 10px;
+        display: block;
+        border: 2px solid #409eff;
+        border-right: none;
+        border-bottom: none;
+        content: '';
+        margin-left: -10px;
+        margin-top: -5px;
+      }
+     // border: ;
+      &.prev-view{
+        border-right:1px solid #d9ecff;
+        &:before{
+          margin-left: -5px;
+          transform:rotate(-45deg);
+          -ms-transform:rotate(-45deg); 	/* IE 9 */
+          -moz-transform:rotate(-45deg); 	/* Firefox */
+          -webkit-transform:rotate(-45deg); /* Safari 和 Chrome */
+          -o-transform:rotate(-45deg); 	/* Opera */
+        }
+      }
+      &.next-view{
+        border-left:1px solid #d9ecff;
+        &:before{
+          transform:rotate(135deg);
+          -ms-transform:rotate(135deg); 	/* IE 9 */
+          -moz-transform:rotate(135deg); 	/* Firefox */
+          -webkit-transform:rotate(135deg); /* Safari 和 Chrome */
+          -o-transform:rotate(135deg); 	/* Opera */
+        }
+      }
     }
     .views-box{
-      width: calc(100% - 40px);
+      width: calc(100% - 60px);
       height: 40px;
       display: inline-block;
       overflow: hidden;
