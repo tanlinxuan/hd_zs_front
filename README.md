@@ -3,13 +3,20 @@
 #### 项目介绍
 通用 vue 前端项目框架 
 
-CND 引入 vue vuex vue-router echarts  elementUI
+CND 引入 vue + vuex + vue-router + echarts 
+
+UI 组件 ant design vue
 
 #### 软件架构
- node 10 +
- webpack 4.X +
- vue 2.X + 
- elementUi 2.X + Echarts 4.X
+ node 10 + 
+ 
+ webpack 4.X + 
+ 
+ vue 2.X +  
+ 
+ Echarts 4.X+ 
+ 
+ ant design vue
  
 #### 使用说明
 
