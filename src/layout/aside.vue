@@ -8,20 +8,27 @@
                 menuData:menu||[],
                 renderMenu:data=>{ //递归返回菜单列表
                     return data.map(item => {
-                        let { children ,name ,title ,isMenu} = item;
+                        let { children ,name ,title ,isMenu,icon} = item;
                         if (children && children.length) {
-                            return (<el-submenu index={name}>
-                                <template slot="title">
-                                    <span slot="title">{title}</span>
-                                </template>
-                                {
-                                    this.renderMenu(children)
-                                }
-                            </el-submenu>)
+                            return (
+                                <a-sub-menu key={name}>
+                                    <span slot="title">
+                                        {
+                                            icon && <a-icon type={icon}/>
+                                        }
+                                        <span>{title}</span>
+                                    </span>
+                                    {
+                                        this.renderMenu(children)
+                                    }
+                                </a-sub-menu>
+                            )
                         } else {
-                            return (isMenu && <el-menu-item onClick={()=>this.handSelect(item)} >
-                                <span slot="title">{title}</span>
-                            </el-menu-item>)
+                            return (
+                                isMenu &&
+                                <a-menu-item key={name} onClick={()=>this.handSelect(item)} >
+                                    {title}
+                                </a-menu-item>)
                         }
                     })
                 },
@@ -31,7 +38,7 @@
             handSelect(item){
                 this.$router.push({ path:item.path})
             },
-            handleOpen(key, keyPath) {
+            onOpenChange(key, keyPath) {
                 console.log(key, keyPath);
             },
             handleClose(key, keyPath) {
@@ -41,15 +48,11 @@
         render(){
             return(
                 <div class="app-aside">
-                    <el-menu default-active="1-4-1"
-                             router={true}
-                             on-open={this.handleOpen}
-                             on-close={this.handleClose}
-                             collapse={this.isCollapse}>
-                    {
-                        this.renderMenu(this.menuData)
-                    }
-                   </el-menu>
+                    <a-menu mode="inline"  onOpenChange={this.onOpenChange}>
+                        {
+                            this.renderMenu(this.menuData)
+                        }
+                    </a-menu>
                 </div>
             )
         }

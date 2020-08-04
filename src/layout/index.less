@@ -1,8 +1,8 @@
 .app-header {
   height: 32px;
   line-height: 32px;
-  padding: 14px 80px;
-  background: #076EE4;
+ // padding: 14px 80px;
+//  background: #076EE4;
   color: #ffffff;
   display: flex;
   justify-content: space-between;
@@ -23,6 +23,9 @@
   height: calc(100vh - 48px);
   border-right: 1px solid #e8e8e8;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+  .ant-menu-inline{
+    border-right:none;
+  }
 }
 
 .app-main {
@@ -30,7 +33,7 @@
   height: 100%;
   background-color: #f9f9f9;
   .component{
-    height: calc(100% - 106px);
+    height: calc(100% - 40px);
     padding: 32px 40px;
     overflow-x: hidden;
     overflow-y: auto;
@@ -38,6 +41,7 @@
       width: 100%;
       min-height: 100%;
       border-radius: 4px;
+      padding: 30px;
       box-shadow: 0 0 10px #eee;
       background-color: #fff;
     }
@@ -102,6 +106,7 @@
           padding: 0 25px;
           border-right: 1px solid #d9ecff;
           color: #409eff;
+          margin-top: -1px;
           cursor: pointer;
           position: relative;
           &.active{

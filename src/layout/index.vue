@@ -1,32 +1,32 @@
 <template>
-    <el-container>
-        <el-header>
-            <Header/>
-        </el-header>
-        <el-container>
-            <el-aside width="220px">
+    <a-layout>
+        <a-layout-header>
+            <PageHeader/>
+        </a-layout-header>
+        <a-layout>
+            <a-layout-sider width="220">
                 <Aside/>
-            </el-aside>
-            <el-container>
-                <el-main>
+            </a-layout-sider>
+            <a-layout>
+                <a-layout-content>
                     <Main/>
-                </el-main>
-                <el-footer>Footer</el-footer>
-            </el-container>
-        </el-container>
-    </el-container>
+                </a-layout-content>
+<!--                <a-layout-footer>Footer</a-layout-footer>-->
+            </a-layout>
+        </a-layout>
+    </a-layout>
 </template>
 <script>
-    import Header from  './header'
-    import Aside from  './aside' // menu
-    import Main from  './main' // menu
+     import PageHeader from  './header'
+     import Aside from  './aside'
+     import Main from  './main'
     import './index.less'
     export default {
-        name: "Layout",
+        name: "PageLayout",
         components: {
-          Header, //头部
-          Aside, // 左侧菜单
-          Main  // body
+           PageHeader, //头部
+           Aside, // 左侧菜单
+           Main  // body
         }
     }
 </script>

@@ -1,6 +1,6 @@
 <script type="text/jsx">
     export default {
-        name: 'Header',
+        name: 'PageHeader',
         data() {
             return {
                 popoverShow: false
@@ -25,20 +25,16 @@
                     <div class="user-info">
                         <ul>
                             <li class="user">
-                                <el-popover placement="bottom" width="120" trigger="hover" visible-arrow={false}
-                                            on-show={() => {
-                                                this.setPopoverShow(true)
-                                            }}
-                                            on-hide={() => {
-                                                this.setPopoverShow(false)
-                                            }}>
-                                    <p>修改密码</p>
-                                    <p onClick={()=>{this.exit()}}>退出登录</p>
-                                    <span slot="reference">
-                                        <span>{userInfo.userName}</span>
-                                        <i class={this.popoverShow ? 'el-icon-arrow-down' : 'el-icon-arrow-up'}></i>
+                                <a-popover trigger="click">
+                                    <template slot="content">
+                                        <p>修改密码</p>
+                                        <p onClick={()=>{this.exit()}}>退出登录</p>
+                                    </template>
+                                    <span>
+                                       {userInfo.userName}
+                                        <i className={this.popoverShow ? 'el-icon-arrow-down' : 'el-icon-arrow-up'}></i>
                                     </span>
-                                </el-popover>
+                                </a-popover>
                             </li>
                         </ul>
                     </div>

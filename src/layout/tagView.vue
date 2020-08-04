@@ -79,8 +79,7 @@
                                 <span onClick={()=>{this.changeTag(item)}}>{item.title}</span>
                                 {
                                     showClose &&
-                                    <i class={`el-icon-close`} onClick={() => {this.removeTag(item)}}>
-                                    </i>
+                                    <a-icon type="close" onClick={() => {this.removeTag(item)}} />
                                 }
                             </li>
                     return _html;

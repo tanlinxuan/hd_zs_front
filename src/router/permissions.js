@@ -35,7 +35,7 @@ router.beforeEach(async(to, from, next) => {
         if (to.path === '/login') { // 如果是登录页面的话，直接next()
             next();
         } else { // 否则 跳转到登录页面
-            next(`/login`)
+            next('/login')
             NProgress.done()
         }
     }

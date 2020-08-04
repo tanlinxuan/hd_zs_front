@@ -9,18 +9,13 @@
         name: "ruleDetail",
         data() {
             return {
-                title: '',
+                title:'',
             }
         },
         created() {
             let urlParams = getUrlKey()
             if(urlParams.title){
                 this.title = urlParams.title
-            }
-        },
-        methods: {
-            search(){
-                this.$router.push({ path:`/ruleManageList/detail?title=${this.input}`,})
             }
         }
     }

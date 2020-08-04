@@ -29,6 +29,7 @@ const actions = {
       roleInfo:'系统管理员',
       token:'1234567890'
     }
+    console.log('登录:' ,data )
     // HTTP.post(httpServer.login,data).then(res=>{
     //   debugger
     // })

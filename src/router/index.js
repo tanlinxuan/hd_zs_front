@@ -5,7 +5,7 @@
  **/
 //import Vue from 'vue'
 
-import Layout from  '@src/layout'
+import PageLayout from  '@src/layout'
 import baseRouter from "./modules/baseRouter";
 import mainRouter from "./modules/mainRouter";
 const originalPush = VueRouter.prototype.push
@@ -17,7 +17,7 @@ const constantRoutes = [
     ...baseRouter,
     {
         path: '/',
-        component: Layout,
+        component: PageLayout,
         redirect: '/home',
         children: [
             {
