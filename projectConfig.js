@@ -5,7 +5,7 @@
  **/
 const path = require('path');
 const projectConfig={
-    port:8089,  //端口
+    port:8098,  //端口
     host:'127.0.0.1', // host
     entry:path.resolve(__dirname,'src/main.js'),  // 入口文件,
     mode:process.env.NODE_ENV || 'development' , // 环境
