@@ -23,7 +23,8 @@
                     {label:'姓名', code: 'userName'},
                     {label:'地址', code: 'address'},
                     {label:'类型', type:'select', code: 'moutype'},
-                    {label:'类型', type:'select', code: 'moutype1'}
+                    {label:'类型1', type:'select', code: 'moutype1'},
+                    {label:'类型2', type:'select', code: 'moutype2'},
                 ]
             }
         },

@@ -2,7 +2,15 @@
     export default {
         name: 'CqTable',
         props:{
-            tableProps:Object
+            tableProps:{
+                type:Object,
+                default(){
+                    return {
+                        columns:[],
+                        dataSource:[]
+                    }
+                }
+            }
         },
         render() {
             let tableConfig= {
@@ -10,7 +18,7 @@
                     bordered:true ,
                     ...this.tableProps
                 }
-            }
+            };
             return (
                 <a-table {...tableConfig}></a-table>
             )

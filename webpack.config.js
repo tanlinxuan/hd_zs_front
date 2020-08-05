@@ -1,13 +1,18 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const {VueLoaderPlugin} = require('vue-loader')
+const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
 const projectConfig = require('./projectConfig')
 const {entry, mode, alias} = projectConfig
 const isDev = mode === 'development' ? true : false
 module.exports = {
-    entry: entry || path.resolve(__dirname, 'src/main.js'),
+    entry: [
+        'babel-polyfill',
+        entry || path.resolve(__dirname, 'src/main.js'),
+    ] ,
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: isDev ? 'js/[name].js' : 'js/[name].[hash:8].js',
@@ -114,11 +119,9 @@ module.exports = {
         extensions: ['*', '.js', '.jsx', '.vue']
     },
     externals: {
-        "vue": "Vue",
+        "vue":"Vue",
         'vue-router': 'VueRouter',
-        'vuex': 'Vuex',
-        'element-ui': 'ElementUI',
-        'echarts': 'echarts',
+        'vuex': 'Vuex'
     },
     plugins: [
         new VueLoaderPlugin(),
@@ -135,6 +138,16 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: isDev ? 'css/[name].css' : "css/[name].[hash:8].css",
             chunkFilename: isDev ? 'css/[name].css' : "css/[name].[hash:8].css",
+        }),
+        new webpack.DllReferencePlugin({
+            context: '.',
+            manifest: require('./static/vendor-manifest.json')
+        }),
+        // 将 dll 注入到 生成的 html 模板中
+        new AddAssetHtmlPlugin({
+            filepath: path.resolve(__dirname, './static/*.js'),
+            publicPath: './static',
+            outputPath: './static'
         })
     ],
 }

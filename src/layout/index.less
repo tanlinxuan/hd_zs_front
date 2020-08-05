@@ -16,6 +16,7 @@
   .user-info{
     float:right;
     display: inline-block;
+    font-size: 14px;
   }
 }
 
@@ -37,13 +38,18 @@
     padding: 32px 40px;
     overflow-x: hidden;
     overflow-y: auto;
-    .page{ //页面直接主容器 ，所有路由页面放此class 下
+    position: relative;
+    .main-page{ //页面直接主容器 ，所有路由页面放此class 下
       width: 100%;
       min-height: 100%;
       border-radius: 4px;
       padding: 30px;
       box-shadow: 0 0 10px #eee;
       background-color: #fff;
+      .page{
+        width: 100%;
+        min-height: 100%;
+      }
     }
   }
   .app-tags-view {
@@ -109,6 +115,7 @@
           margin-top: -1px;
           cursor: pointer;
           position: relative;
+          font-size: 14px;
           &.active{
             background-color: #ecf5ff;
             font-weight: bold;

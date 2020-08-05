@@ -3,26 +3,20 @@
 #### 项目介绍
 通用 vue 前端项目框架 
 
-CND 引入 vue + vuex + vue-router + echarts 
-
-UI 组件 ant design vue
+CND 引入 vue vuex vue-router echarts  elementUI
 
 #### 软件架构
- node 10 + 
- 
- webpack 4.X + 
- 
- vue 2.X +  
- 
- Echarts 4.X+ 
- 
- ant design vue
+ node 10 +
+ webpack 4.X +
+ vue 2.X + 
+ elementUi 2.X + Echarts 4.X
  
 #### 使用说明
 
 1. 安装依赖  npm i
-2. 启动项目  npm start
-3. 生产环境打包 npm run build
+2. 启动项目  npm start , 首次启动项目 ，需先运行 npm run build:dll
+3. 生产环境打包 npm run build 
+4. 依赖资源单独打包  npm run build:dll ,将 antd 与 echarts 单独打包
 #### 目录结构
 
 eg:

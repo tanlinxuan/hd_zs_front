@@ -29,11 +29,11 @@ module.exports = {
         'lodash',
         // spread ...
         // '@babel/plugin-syntax-object-rest-spread',
-        ["import", {
-            "libraryName": "ant-design-vue",
-            "libraryDirectory": "lib",
-            "style": "css"
-        }],
+        // ["import", {
+        //     "libraryName": "ant-design-vue",
+        //     "libraryDirectory": "lib",
+        //     "style": "css"
+        // }],
         ...removeConsolePlugin
     ]
 };
