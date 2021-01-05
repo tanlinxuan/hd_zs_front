@@ -5,8 +5,10 @@
  **/
 const path = require('path');
 const projectConfig={
-    port:8089,  //端口
+    port:8091,  //端口
     host:'127.0.0.1', // host
+    home:' "/map" ', //默认路径
+    baseUrl:' "/map" ', // 默认重定向路径
     entry:path.resolve(__dirname,'src/main.js'),  // 入口文件,
     mode:process.env.NODE_ENV || 'development' , // 环境
     alias:{ //静态文件路径别名配置
@@ -20,12 +22,18 @@ const projectConfig={
         '@components':path.resolve(__dirname,'src/components'), // 通用组件库
     },
     proxy: {  //自定义代理配置集合
-        '/api':{
-            target: 'https://www.fastmock.site/mock/91681c211b0d8cafc9d31266a65346a6/api',
+        '/uc':{
+            target: 'http://j-fin.ihdwork.com',
             changeOrigin: true,
-            pathRewrite:{
-                '^/api' : '/'
-            }}
+        },
+        '/fin':{
+            target: 'http://j-fin.ihdwork.com',
+            changeOrigin: true,
+        },
+        '/screen':{
+            target: 'http://j-fin.ihdwork.com',
+            changeOrigin: true,
+        }
     }
 
 }
