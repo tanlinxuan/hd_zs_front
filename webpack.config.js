@@ -93,12 +93,12 @@ module.exports = {
                 ]
             },
             {
-                test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/i, // 字体
+                test: /\.(woff?2|eot|ttf|otf|svg)(\?.*)?$/i, // 字体
                 use: [
                     {
                         loader: 'url-loader',
                         options: {
-                            limit: 1024 * 5,
+                            limit: 1024 * 2,
                             publicPath: '../',
                             fallback: {
                                 loader: 'file-loader',
@@ -124,6 +124,11 @@ module.exports = {
         'vuex': 'Vuex'
     },
     plugins: [
+        //配置全局变量
+        new webpack.DefinePlugin({
+            HOME:projectConfig.home,
+            BASE_URL:projectConfig.baseUrl
+        }),
         new VueLoaderPlugin(),
         new CleanWebpackPlugin({
             path: './dist'

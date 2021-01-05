@@ -1,0 +1,44 @@
+.error_found{
+  position: absolute;
+  width: 317px;
+  height: 310px;
+  left: 47%;
+  top: 40%;
+  transform: translate(-50% , -50%);
+  .error_body{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    .error_position{
+      background: url("~@public/error-pin.png") no-repeat;
+      background-size: 100% 100%;
+      width: 38px;
+      height: 38px;
+      position: absolute;
+      left: 50%;
+      margin-left: -18px;
+      top: 0;
+    }
+    .error_box{
+      background: url("~@public/error-hanger.png") no-repeat;
+      background-size: 100% 100%;
+      width: 317px;
+      margin-top: 12px;
+      height: 297px;
+      text-align: center;
+      overflow: hidden;
+      font-size: 26px;
+      font-weight: bold;
+      color: #5D5D5D;
+      transform-origin: center top;
+      p{
+       margin-bottom: 10px;
+        line-height: 35px;
+        &:first-child{
+          margin-top: 150px;
+          font-size: 45px;
+        }
+      }
+    }
+  }
+}

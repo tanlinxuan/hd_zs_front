@@ -3,7 +3,7 @@
  * @author 谭邻宣
  * @date 2020/7/6 14:32
  **/
-import menu from "@router/mock";
+import pageRouter from "@router/router";
 const isArray = arr =>{
     return Object.prototype.toString.call(arr) === '[object Array]'?true:false
 }
@@ -18,5 +18,5 @@ const flatten = arr => arr.reduce((prev, next) => { //递归调用 ，展开 men
             return  prev.concat(routerConfig)
         }
     },[])
-const mainRouter =[...flatten(menu)];
+const mainRouter =[...flatten(pageRouter)];
 export default mainRouter

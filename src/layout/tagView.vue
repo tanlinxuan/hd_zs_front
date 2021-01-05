@@ -43,12 +43,12 @@
             removeTag(vm) {  //关闭页面
                 this.$store.dispatch('tagViews/removeViewList', vm).then(() => {
                     const {activeView} = this.$store.getters
-                    this.$router.push({path: activeView.path})
+                    this.$router.replace({path: activeView.path})
                 })
             },
             changeTag(vm){
                 this.$store.dispatch('tagViews/changeViewList', vm).then(() => {
-                    this.$router.push({path: vm.path})
+                    this.$router.replace({path: vm.path})
                 })
             },
             prevView(type){  //tag 过多 ，左右切换

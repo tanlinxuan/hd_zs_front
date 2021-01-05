@@ -1,12 +1,9 @@
 .app-header {
   height: 32px;
   line-height: 32px;
- // padding: 14px 80px;
-//  background: #076EE4;
   color: #ffffff;
   display: flex;
   justify-content: space-between;
-
   .logo {
     width: 160px;
     height: 32px;
@@ -17,12 +14,30 @@
     float:right;
     display: inline-block;
     font-size: 14px;
+    li{
+      padding: 0 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      float: right;
+      margin-left: 10px;
+      .ant-popover-inner-content{
+        padding: 6px;
+        p{
+          padding: 0 10px;
+         // border-bottom: 1px solid;
+          height: 32px;
+          line-height: 32px;
+          margin: 5px;
+          cursor: pointer;
+          border-radius: 3px;
+        }
+      }
+    }
   }
 }
 
 .app-aside {
   height: calc(100vh - 48px);
-  border-right: 1px solid #e8e8e8;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
   .ant-menu-inline{
     border-right:none;
@@ -32,7 +47,6 @@
 .app-main {
   width: 100%;
   height: 100%;
-  background-color: #f9f9f9;
   .component{
     height: calc(100% - 40px);
     padding: 32px 40px;
@@ -44,19 +58,20 @@
       min-height: 100%;
       border-radius: 4px;
       padding: 30px;
+      padding-bottom: 10px;
       box-shadow: 0 0 10px #eee;
       background-color: #fff;
       .page{
         width: 100%;
-        min-height: 100%;
+        height: calc(100vh - 204px);
       }
     }
   }
   .app-tags-view {
     height: 40px;
     line-height: 40px;
-    border-bottom: 1px solid #d9ecff;
-    background-color: #fff;
+   // border-bottom: 1px solid #d9ecff;
+   // background-color: #fff;
     >span{
       display: inline-block;
       height: 40px;
@@ -69,7 +84,7 @@
         width: 10px;
         height: 10px;
         display: block;
-        border: 2px solid #409eff;
+        border: 2px solid;
         border-right: none;
         border-bottom: none;
         content: '';
@@ -78,7 +93,7 @@
       }
      // border: ;
       &.prev-view{
-        border-right:1px solid #d9ecff;
+        border-right:1px solid;
         &:before{
           margin-left: -5px;
           transform:rotate(-45deg);
@@ -89,7 +104,7 @@
         }
       }
       &.next-view{
-        border-left:1px solid #d9ecff;
+        border-left:1px solid;
         &:before{
           transform:rotate(135deg);
           -ms-transform:rotate(135deg); 	/* IE 9 */
@@ -108,16 +123,17 @@
         height: 100%;
         white-space: nowrap;
         li {
+          &:first-child{
+            padding: 0 25px;
+          }
           display: inline-block;
-          padding: 0 25px;
-          border-right: 1px solid #d9ecff;
-          color: #409eff;
+          padding: 0 30px 0 20px;
+          border-right: 1px solid;
           margin-top: -1px;
           cursor: pointer;
           position: relative;
           font-size: 14px;
           &.active{
-            background-color: #ecf5ff;
             font-weight: bold;
           }
           span{
@@ -132,8 +148,6 @@
             top: 14px;
             position: absolute;
             &:hover{
-              background-color: #409eff;
-              color: #fff;
               border-radius: 50%;
             }
           }

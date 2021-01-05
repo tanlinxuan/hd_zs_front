@@ -1,0 +1,113 @@
+.cq_table{
+  .ant-table{
+    .ant-table-content{
+      .ant-table-thead,.ant-table-tbody{
+        tr th , tr td{
+          padding: 8px 16px;
+        }
+        tr th{
+          text-align: center !important;
+        }
+      }
+      //滚动条 样式重置
+      .ant-table-scroll{
+        border-left: 1px solid #e8e8e8;
+        position: relative;
+        &:after{
+          width: 10px;
+          height: 10px;
+          content: '';
+          display: block;
+          position: absolute;
+          background-color: rgba(229,229,229,1);
+          bottom: 0;
+          right: 0;
+        }
+        .ant-table-header{
+          margin-bottom: -10px !important;
+          overflow: auto !important;
+
+          .ant-table-fixed{
+            border-left: none;
+           // padding-right: 10px;
+          }
+
+          &.ant-table-hide-scrollbar{
+            min-width: 10px !important;
+          }
+          &::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+          }
+          &::-webkit-scrollbar-thumb {
+            border-radius: 5px;
+            background: rgba(183,183,183,1);
+          }
+          &::-webkit-scrollbar-track {
+            //border-radius: 5px;
+            background: rgba(229,229,229,1);
+          }
+        }
+        .ant-table-body{
+          .ant-table-fixed{
+            border-left: none;
+          }
+            &::-webkit-scrollbar {
+              width: 10px;
+              height: 10px;
+            }
+            &::-webkit-scrollbar-thumb {
+              border-radius: 5px;
+              background:rgba(183,183,183,1);
+            }
+            &::-webkit-scrollbar-track {
+              //border-radius: 5px;
+              background: rgba(229,229,229,1);
+            }
+        }
+      }
+      .ant-table-fixed-left,.ant-table-fixed-right{
+        .ant-table-body-outer{
+          margin-bottom:-10px !important; ;
+        }
+      }
+      .ant-table-fixed-right{
+        .ant-table-header{
+          overflow: auto;
+          &::-webkit-scrollbar {
+            width: 10px;
+            height:0px;
+          }
+          &::-webkit-scrollbar-track {
+            background: rgba(229,229,229,1);
+          }
+        }
+      }
+      .ant-table-body-inner{
+        .ant-table-fixed{
+          .ant-table-tbody{
+            tr td{
+              padding: 8px 16px;
+            }
+          }
+        }
+        &::-webkit-scrollbar {
+          width: 10px;
+          height: 10px;
+        }
+        &::-webkit-scrollbar-thumb {
+          border-radius: 5px;
+          background: rgba(183,183,183,1);
+        }
+        &::-webkit-scrollbar-track {
+          //border-radius: 5px;
+          background: rgba(229,229,229,1);
+        }
+      }
+    }
+  }
+
+  .ant-table-pagination.ant-pagination{
+    margin-bottom: 0;
+  }
+}

@@ -1,8 +1,18 @@
 <script type="text/jsx">
+    /**
+     * 搜索功能模块
+     * @author 谭邻宣
+     * @date 2020/7/26 11:34
+     **/
+    import CqSearchSelect from '@components/CqSearchSelect'
+    import moment from 'moment'
     import './index.less'
     const formBaseHeight = 64;//常量:表单域基础高度 , 单行64px , 用于计算表单域 展开收起 height 值
     export default {
         name: "Search",
+        components: {
+            CqSearchSelect
+        },
         data(){
             return {
                 searchForm: this.$form.createForm(this, { name: 'searchForm' }), //包装form 表单域
@@ -10,10 +20,25 @@
                 formCol: 0 , // 表单域行数
                 colItems:0, //单行显示个数
                 isTrigger:false, //高度控制器
+                formData:{  //不受控组件值缓存
+
+                },
+                formatList:[]
             }
         },
         props:{
             searchArray:Array
+        },
+        watch:{
+            searchArray(newV , oldV){
+                let formatDict=['rangePicker'];
+                this.formatList=[];
+                this.formatList = newV.map(item=>{  //预设日期格式队列 ，返回值时format
+                    if(formatDict.indexOf(item.type)>-1){
+                       return item.code
+                    }
+                })
+            }
         },
        created() {
             let length =  this.searchArray.length, // 表单项长度
@@ -22,7 +47,6 @@
             if(length){
                 this.formCol =Math.ceil(length/colItems);
                 this.colItems = colItems;
-               // this.isTrigger = formCol > 1;
             }
        },
         computed:{
@@ -33,15 +57,25 @@
         },
         methods: {
             /***
-             * 格式化参数 ，去掉undefind
+             * 格式化参数 ，undefined
              * @param value
              * @returns {{}}
              */
             formatValues(value){
                 let formatValue={};
                 for (let key in value){
-                    if (value[key]){
-                        formatValue[key] = value[key]
+                    if (value[key]){ //去掉 undefined
+                        if(this.formatList.length && this.formatList.indexOf(key)>-1){  //判断是否为日期组件
+                            if(Object.prototype.toString.call(value[key]) === '[object Array]'){ // 判断是否数组
+                                formatValue[key] = value[key].map(item=>{
+                                  return  moment(item).format('YYYY-MM-DD')
+                                })
+                            }else{
+                                formatValue[key] = moment(value[key]).format('YYYY-MM-DD')
+                            }
+                        }else{
+                            formatValue[key] = value[key]
+                        }
                     }
                 }
                 return formatValue;
@@ -51,43 +85,69 @@
              * @param e
              */
             onSearch(e) {
-                let that = this;
                 e.preventDefault();
-                this.searchForm.validateFields((err, values) => {
-                    if (!err) {
-                        let params = that.formatValues(values)
-                        that.$emit('search',params)
-                    }
-                });
+                let params = this.searchForm.getFieldsValue();
+                this.$emit('search',this.formatValues({...params,...this.formData}))
+            },
+            onChange(value){
+                this.formData = { ...this.formData , ...value}
             },
             /**
              * 重置表单域
              */
             onResetField(){
                 this.searchForm.resetFields();
-                this.$emit('search',{})
+                this.$emit('search',null)
             },
+            //返回 select option
+            renderSelectOption(data = []){
+                return data.map(itm=>{
+                    return <a-select-option key={itm.value} value={itm.value} >{itm.label}</a-select-option>
+                })
+            },
+
+
             /***
              * 根据type ,生成表单项
              * @param item
              * @returns {*}
              */
             renderformItem(item){
-                const {label , options , code , child ,type} = item;
-                let _html = '' ;
+                const {label ,data, type ,itemProps } = item;
+                let props = {  //预定义表单项配置
+                    props:{
+                        placeholder:`请输入` + label,
+                        type:type?type:'text'
+                    }
+                }
+                let _html = <a-input {...props}/>;
                 if (type) {
                     switch (type) {
-                        case 'select':
-                            _html = <a-select>
-                                <a-select-option key="1">选项1</a-select-option>
-                                <a-select-option key="2">选项2</a-select-option>
-                            </a-select>
+                        case 'select':   //静态data下拉,支持模糊筛选过滤
+                            props = {
+                                props:{
+                                    placeholder:`请选择` + label,
+                                    allowClear:true,
+                                    ...itemProps
+                                }
+                            }
+                            // 模糊匹配筛选过滤
+                            if(itemProps?.showSearch){
+                                props.props.filterOption=(target, config)=>{
+                                    return (
+                                        config.componentOptions.children[0].text.toLowerCase().indexOf(target.toLowerCase()) >= 0
+                                    );
+                                }
+                            }
+                            _html = <a-select {...props}>{this.renderSelectOption(data)}</a-select>
                             break;
-                        default:
-                            _html = <a-input type={type} placeholder={`请输入` + label}/>
+                        case 'searchSelect':   //远程模糊筛选
+                            _html = <cq-search-select searchProps={item} onChange={this.onChange}></cq-search-select>
+                            break;
+                        case 'rangePicker':
+                            _html = <a-range-picker/>
+                            break
                     }
-                } else {
-                    _html = <a-input type='text' placeholder={`请输入` + label}/>
                 }
                 return _html;
             },
@@ -105,7 +165,7 @@
                 let colSpan= 24/this.colItems ; //根据每行显示个数 ，设置col span
                 //遍历表单配置 ， 生成 formItem
                 return fromArr.map(item=>{
-                    const {label , options , code , child ,type} = item;
+                    const {label , options , code} = item;
                     let formConfig= {
                         props:{
                             label,

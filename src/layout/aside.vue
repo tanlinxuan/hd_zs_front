@@ -1,54 +1,80 @@
 <script type="text/jsx">
-    import menu from '@router/mock'
+    import pageRouter from '@router/router'
     export default {
         name:'Aside',
         data() {
             return {
                 isCollapse: false,
-                menuData:menu||[],
-                renderMenu:data=>{ //递归返回菜单列表
-                    return data.map(item => {
-                        let { children ,name ,title ,isMenu,icon} = item;
-                        if (children && children.length) {
-                            return (
-                                <a-sub-menu key={name}>
+                menuData:pageRouter||[],
+                openMenu: [], //左侧打开菜单的key
+            };
+        },
+        computed: {
+            checkedMenu() {
+                return this.$store.state.tagViews.activeView
+            }
+        },
+        watch: {
+            checkedMenu(newVal, oldVal) {
+                let menuKey = newVal.path.split('/');
+                    menuKey.shift();
+                    if(this.openMenu.indexOf(menuKey[0]) < 0 ){
+                        this.openMenu.push(menuKey[0])
+                    }
+            }
+        },
+        created(){
+            // this.openMenu = this.menuData.map(item=>{
+            //     let { children ,name} = item;
+            //     if (children && children.length) {return name}
+            // })
+        },
+        methods: {
+            handSelect(item){
+                this.$router.replace({ path:item.path})
+            },
+            onOpenChange(key, keyPath) {
+                this.openMenu = key;
+            },
+            renderMenu(data){ //递归返回菜单列表
+                return data.map(item => {
+                    let { children ,name ,title ,isMenu,icon} = item;
+                    if (children && children.length) {
+                        return (
+                            <a-sub-menu key={name}>
                                     <span slot="title">
                                         {
                                             icon && <a-icon type={icon}/>
                                         }
-                                        <span>{title}</span>
+                                        <span style={{marginLeft:!icon?'23px':'0px'}}>{title}</span>
                                     </span>
-                                    {
-                                        this.renderMenu(children)
-                                    }
-                                </a-sub-menu>
-                            )
-                        } else {
-                            return (
-                                isMenu &&
-                                <a-menu-item key={name} onClick={()=>this.handSelect(item)} >
-                                    {title}
-                                </a-menu-item>)
-                        }
-                    })
-                },
-            };
-        },
-        methods: {
-            handSelect(item){
-                this.$router.push({ path:item.path})
-            },
-            onOpenChange(key, keyPath) {
-                console.log(key, keyPath);
-            },
-            handleClose(key, keyPath) {
-                console.log(key, keyPath);
+                                {
+                                    this.renderMenu(children)
+                                }
+                            </a-sub-menu>
+                        )
+                    } else {
+                        return (
+                            isMenu &&
+                            <a-menu-item key={name} onClick={()=>this.handSelect(item)} >
+                                {
+                                    icon && <a-icon type={icon}/>
+                                }
+                                <span style={{marginLeft:!icon?'23px':'0px'}}>{title}</span>
+                            </a-menu-item>)
+                    }
+                })
             }
         },
         render(){
             return(
                 <div class="app-aside">
-                    <a-menu mode="inline"  onOpenChange={this.onOpenChange}>
+                    <a-menu
+                    mode="inline" 
+                    selectedKeys={[this.checkedMenu.name]} 
+                    onOpenChange={this.onOpenChange}
+                    openKeys={this.openMenu}
+                    >
                         {
                             this.renderMenu(this.menuData)
                         }

@@ -26,9 +26,6 @@
             key() {
                 return this.$route.fullPath
             }
-        },
-        created() {
-          //  console.log(this.$route)
         }
     }
 </script>

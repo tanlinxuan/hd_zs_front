@@ -13,7 +13,7 @@ const dllPath = 'static'
 module.exports = {
     entry: {
         // 需要提取的库文件
-        vendor: ['axios', 'ant-design-vue' , 'echarts']
+        vendor: ['vue','ant-design-vue','axios', 'echarts']
     },
     output: {
         path: path.join(__dirname, dllPath),

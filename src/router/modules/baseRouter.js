@@ -7,7 +7,12 @@
 const baseRouter =[
     {
         path: '/login',
-        component: () => import('@pages/login'),
+        component: () => import('@pages/common/login'),
+        hidden: true
+    },
+    {
+        path: '/map',
+        component: () => import('@pages/common/map'),
         hidden: true
     }
 ]

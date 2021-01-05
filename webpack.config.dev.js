@@ -4,7 +4,7 @@ const WebpackMerge = require('webpack-merge')
 const projectConfig = require('./projectConfig')
 const {port ,host ,proxy} = projectConfig
 module.exports = WebpackMerge(webpackConfig,{
-    devtool:"cheap-module-eval-source-map",// 开发环境配置
+    devtool:"source-map",// 开发环境配置
     devServer:{
         port:port,
         host:host,

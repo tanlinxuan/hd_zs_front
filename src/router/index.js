@@ -23,8 +23,14 @@ const constantRoutes = [
             {
                 path: 'home',
                 name: 'home',
-                component: () => import('@src/pages/home'),
+                component: () => import('@pages/common/home'),
                 meta: { title: '首页', affix: true }
+            },
+            {
+                path: '404',
+                name: '404',
+                component: () => import('@pages/common/error/404.vue'),
+                meta: { title:'No Found', affix:true}
             },
             ...mainRouter
         ]

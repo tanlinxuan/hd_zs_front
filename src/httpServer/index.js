@@ -4,51 +4,68 @@
  * @date 2020/7/10 16:24
  **/
 import axios from 'axios'
-import { getToken} from '@utils/utils'
+import CryptoJS from 'crypto-js'
 import store from "@utils/store";
+import {  message } from 'ant-design-vue';
 const HTTP = axios.create({
-    timeout: 3 * 60 * 1000, //三分钟超时
-    headers: {
-        get: {
-            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
-        },
-        post: {
-            'Content-Type': 'application/json;charset=utf-8'
-        },
-    }
+    timeout: 10 * 1000, //10s 超时
 })
-HTTP.interceptors.request.use(
-    config => {
-        if (store.getters.token) {
-            config.headers['X-Token'] = getToken()
+const baseUrl = process.env.NODE_ENV==='development'?'j-fin.ihdwork.com':window.location.host
+
+HTTP.interceptors.request.use(config => {
+        const { mac_key ,access_token} = store.getters.tokensInfo;
+        config.headers['HD-App-Code'] = 'hd.youqi.web.v10';
+        config.headers['Content-Type'] = 'application/json;charset=utf-8';
+        if(config.url.indexOf('/v0.1/tokens') > 0){
+            return config
+        }else{
+            if(access_token){
+                const key = mac_key;
+                var randomStr = '',
+                    date = new Date().getTime(),
+                    chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';
+                for (var i = 0; i < 8; ++i) {
+                    randomStr += chars.charAt(Math.floor(Math.random() * 8));
+                }
+                var nonce = date + ':' + randomStr;
+                var url_ = '';
+                if (config.params) {
+                    url_ = config.url;
+                    var url_1 = '';
+                    Object.getOwnPropertyNames(config.params).forEach(
+                        function (key) {
+                            var link = '&' + key + "=" + config.params[key];
+                            url_1 += link;
+                        });
+                    url_ = url_ + "?" + (url_1.substr(1)).replace(' ', '');
+                } else {
+                    url_ = config.url;
+                }
+                var mac = nonce + '\n' + config.method.toUpperCase() + '\n' + url_ + '\n' + baseUrl + '\n';
+                const hash = CryptoJS.HmacSHA256(mac, key);
+                var macAsign = CryptoJS.enc.Base64.stringify(hash);
+                config.headers['Authorization'] = 'MAC id=' + access_token + ', nonce="' + nonce + '", mac="' + macAsign + '"';
+                return config
+            }
         }
-        return config
     },
     error => {
         return Promise.reject(error)
     }
 )
-HTTP.interceptors.response.use(
-    response => {
+HTTP.interceptors.response.use(response => {
         const res = response.data
         if (res.code !== '0000') {
-            ElementUI.message({
-                message: res.message || 'Error',
-                type: 'error',
-                duration: 5 * 1000
-            })
-            return Promise.reject(new Error(res.message || 'Error'))
-        } else {
-            return res
+            message.error(res.message || 'Error')
         }
+        return res
+       // return response.data
     },
     error => {
-        ElementUI.message({
-            message: error.message,
-            type: 'error',
-            duration: 5 * 1000
-        })
+        message.error(error || 'Error')
         return Promise.reject(error)
     }
 )
 export default HTTP
+
+

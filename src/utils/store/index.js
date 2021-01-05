@@ -4,7 +4,7 @@
  * @date 2020/7/9 17:15
  **/
 //import Vue from 'vue'
-import Vuex from 'vuex'
+//import Vuex from 'vuex'
 import getters from "./getters";
 import createPersistedState from "vuex-persistedstate" //本地化存储
 
